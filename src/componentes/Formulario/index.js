@@ -6,16 +6,6 @@ import './Formulario.css'
 
 const Formulario = (props) => {
 
-    const times = [
-        "Programação",
-        "Front-End",
-        "Data Science",
-        "Devops",
-        "UX e Design",
-        "Mobile",
-        "Inovação e Gestão"
-    ];
-
     // useState é falar para o React renderizar novamente a informação que foi alterada
     // [nome, setNome] = [valor do meu estado, função que atualiza o meu estado]
     const [nome, setNome] = useState('')
@@ -60,7 +50,7 @@ const Formulario = (props) => {
                 <ListaSuspensa 
                     obrigatorio={true} 
                     label="Time" 
-                    itens={times}
+                    itens={props.times}
                     valor={time}
                     aoAlterado={valor => setTime(valor)}
                 />
