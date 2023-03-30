@@ -1,18 +1,14 @@
 import './Colaborador.css'
 
-// Desestruturação das props = { nome, imagem, cargo }
-const Colaborador = ({nome, imagem, cargo, corDeFundo}) => {
-    return (
-        <div className='colaborador'>
-            <div className='cabecalho' style={{backgroundColor: corDeFundo}}>
-                <img src={imagem} alt={nome} />
-            </div>
-            <div className='rodape_card'>
-                <h4>{nome}</h4>
-                <h5>{cargo}</h5>
-            </div>
+const Colaborador = ({ colaborador, corDeFundo }) => {
+    return (<div className="colaborador">
+        <div className="cabecalho" style={{ backgroundColor: corDeFundo }}>
+            <img src={colaborador.imagem} alt={colaborador.nome} />
         </div>
-    )
+        <div className="rodape_card">
+            <h4>{colaborador.nome}</h4>
+            <h5>{colaborador.cargo}</h5>
+        </div>
+    </div>)
 }
-
 export default Colaborador
