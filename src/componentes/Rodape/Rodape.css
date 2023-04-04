@@ -20,3 +20,16 @@
     display: inline-block;
     margin-right: 32px;
 }
+
+@media screen and (max-width: 768px) {
+    .rodape {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .rodape img {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+    }
+}
