@@ -1,70 +1,121 @@
-# Getting Started with Create React App
+# Organo - Pessoas e Times
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Curso de React.js - Alura
 
-## Available Scripts
+<!--ts-->
+   * [Tecnologias](#Tecnologias)
+   * [O Projeto](#O-Projeto)
+   * [O que eu aprendi](#O-que-eu-aprendi)
+   * [O que eu fiz além do curso](#O-que-eu-fiz-além-do-curso)
+<!--te-->
 
-In the project directory, you can run:
+## Tecnologias
 
-### `npm start`
+- HTML
+- CSS
+- JavaScript
+- React.js
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## O Projeto
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+O Projeto Organo nada mais que é um formulário de criação de times e colaboradores. Nele podemos inserir os colaboradores que fazem parte dos times existentes, ou se necessário, criar novos times a serem preenchidos.
 
-### `npm test`
+Para cada time existente e criado, pode ser estilizado com a cor que preferir, mudando no seletor de cores presentes em cada time.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Para a inserção de uma imagem do colaborador, basta colar a URL do perfil do colaborador no GitHub e adicionar a extensão ao final: ```https://github.com/jobemcamera.png```
 
-### `npm run build`
+## O que eu aprendi
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+De maneira geral, quase tudo foi novidade. Entretando, listarei os principais conceitos adquiridos nesse curso:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- ### Dependências - ```package.json```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Para a criação da aplicação React, utilizamos o ```npx create-react-app```. Após a criação, foram necessárias as instalações de diversos pacotes com o auxílio do ```Node.js```, utilizando ```npm install```.
 
-### `npm run eject`
+Para cada nova necessidade de pacotes adicionais, era necessário buscar e fazer sua instalação pelo ```npm```.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Durante o curso, utilizamos:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- ```uuidv4``` para criação de ID's;
+- ```hex-to-rgba``` para passarmos o código Hexadecimal para RGBA;
+- ```react-icons```para inserirmos ícones.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- ### Componentes
 
-## Learn More
+Aqui um conceito novo e super importante. Componentes nada mais são que códigos que podem ser reutilizados para outras partes da aplicação. A ideia é criar um código que seja o mais genérico possível para poder ser replicado. E claro, sempre há a refatoração quando necessário.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Seguindo um exemplo de componente criado no Organo, temos:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```js
+import './Campo.css'
 
-### Code Splitting
+const Campo = ({ type = 'text', label, placeholder, valor, aoAlterado, obrigatorio = false }) => {
+    return (
+        <div className={`campo campo-${type}`}>
+            <label>{label}</label>
+            <input 
+                type={type} 
+                value={valor} 
+                onChange={evento => aoAlterado(evento.target.value)} 
+                required={obrigatorio} placeholder={placeholder}
+            /> 
+        </div>
+    )
+}
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+export default Campo
+```
 
-### Analyzing the Bundle Size
+O componente Campo, recebe como parâmetro diversos argumentos que são chamados de ```props```. Essas ```props```estão vindo do arquivo principal, o ```App.js```. O ```React``` irá ler a ```arrow function``` armazenada na constante Campo, todo ```JSX``` que está no ```return```. 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- ### JSX
 
-### Advanced Configuration
+Parece ```HTML``` mas não é. ```JSX``` é uma extensão de sintaxe para ```JavaScript``` que permite escrever ```HTML``` dentro do próprio código ```JavaScript```, utilizado principalmente no ```React``` para renderizar componentes de forma declarativa.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- ### Hooks - useState
 
-### `npm run build` fails to minify
+O ```Hook useState``` retorna um ```array``` com dois valores: o primeiro é o estado atual e o segundo é uma função que permite atualizar esse estado. Por exemplo, utilizamos alguns ```useState``` ao longo do projeto:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```js
+    const [nome, setNome] = useState('')
+    const [cargo, setCargo] = useState('')
+    const [imagem, setImagem] = useState('')
+    const [time, setTime] = useState('')
+    const [nomeTime, setNomeTime] = useState('')
+    const [corTime, setCorTime] = useState('#000000')
+```
+
+
+
+- ### Key
+
+```Key``` é um atributo especial que pode ser usado em React ao renderizar listas de elementos. Ele ajuda o React a identificar quais elementos foram adicionados, removidos ou alterados em uma lista, e assim pode fazer a atualização de forma mais eficiente.
+
+
+```js
+<div className='colaboradores'>
+                {colaboradores.map((colaborador, indice) => {
+                    return (
+                        <Colaborador 
+                            key={indice} 
+                            colaborador={colaborador} 
+                            corDeFundo={time.cor} 
+                            aoDeletar={aoDeletar} 
+                            aoFavoritar={aoFavoritar}
+                        />
+                    )
+                })}
+</div>
+```
+
+## O que eu fiz além do curso
+
+Como aprendizado inicial, segui basicamente a risca o que foi passado no curso. Porém, a responsividade não foi implementada, sendo assim, a apliquei utilizando as velhas e conhecidas ```media query```. Entretando, sei que existem outras maneiras de se resolver a responsividade em ```React```, como ```Styled Components``` e até mesmo ```Bootstrap```.
+
+
+
